@@ -3,7 +3,7 @@
   <div class="container-fluid">
       <div class="col" v-for="toDoList in toDoLists" :key="toDoList.id">
         <div class="card h-100">
-          <img :src="getToDoList(toDoList)" class="card-img" :alt="toDoList.title">
+          <img :src="getToDoList(toDoList)" class="card-img-bot" :alt="toDoList.title">
           <div class="card-body">
             <h5 class="card-title">{{ toDoList.title}} </h5>
             <p class="card-text">
