@@ -3,7 +3,7 @@
   <div class="container-fluid">
       <div class="col" v-for="toDoList in toDoLists" :key="toDoList.id">
         <div class="card h-100">
-          <img :src="getToDoList(toDoList)" class="card-img-top" :alt="toDoList.title">
+          <img :src="getToDoList(toDoList)" class="card-img" :alt="toDoList.title">
           <div class="card-body">
             <h5 class="card-title">{{ toDoList.title}} </h5>
             <p class="card-text">
@@ -29,10 +29,11 @@ export default {
       if (toDoList.id.exists) {
         return require('../assets/todoPng.png')
       }
+      return require('../assets/todoPng.png')
     }
   },
   mounted () {
-    const endpoint = process.env.VUE_APP_BACKEND_BASE_URL + 'api/v1/todos'
+    const endpoint = process.env.VUE_APP_BACKEND_BASE_URL + '/api/v1/todos'
     const requestOptions = {
       method: 'GET',
       redirect: 'follow'
