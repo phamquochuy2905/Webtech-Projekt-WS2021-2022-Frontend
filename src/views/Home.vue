@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <HelloWorld msg="Welcome to Todo App"/>
-    <img alt="To-do-list Logo" src="../assets/logo.png">
+    <img alt="To-do-list Logo" src="../assets/todoPng.png">
   </div>
 </template>
 

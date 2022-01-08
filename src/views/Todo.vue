@@ -1,36 +1,25 @@
 <template>
-  <h1>Welcome to your Todo list</h1>
+  <h1>Your Todo list</h1>
   <div class="container-fluid">
-      <div class="col" v-for="toDoList in toDoLists" :key="toDoList.id">
-        <div class="card h-100">
-          <img :src="getToDoList(toDoList)" class="card-img-bot" :alt="toDoList.title">
-          <div class="card-body">
-            <h5 class="card-title">{{ toDoList.title}} </h5>
-            <p class="card-text">
-              {{ toDoList.title }} ist am {{toDoList.deadline}} fällig.
-              Fertigstellungsstatus: {{toDoList.completed ? 'fertig' : 'noch nicht fertig'}}
-            </p>
-          </div>
-        </div>
-      </div>
+    <todo-list :toDoLists="this.toDos"></todo-list>
   </div>
+    <todo-create-form></todo-create-form>
 </template>
 
 <script>
+import TodoCreateForm from '@/components/TodoCreateForm'
+import TodoList from '@/components/TodoList'
+
 export default {
-  name: 'TodoList',
+  name: 'Todo',
+  components: { TodoList, TodoCreateForm },
   data () {
     return {
-      toDoLists: []
+      toDos: [
+      ]
     }
   },
   methods: {
-    getToDoList (toDoList) {
-      if (toDoList.id.exists) {
-        return require('../assets/todoPng.png')
-      }
-      return require('../assets/todoPng.png')
-    }
   },
   mounted () {
     const endpoint = process.env.VUE_APP_BACKEND_BASE_URL + '/api/v1/todos'
@@ -50,6 +39,23 @@ export default {
 </script>
 
 <style scoped>
+.todo-input {
+  width: 100%;
+  padding: 10px 18px;
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+.todo-item {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  animation-duration: 0.3s;
+}
+.remove-item {
+  cursor: pointer;
+  margin-left: 14px;
+}
 
 </style>
 
