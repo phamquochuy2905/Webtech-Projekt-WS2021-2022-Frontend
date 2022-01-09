@@ -1,7 +1,7 @@
 <template>
   <h1>Your Todo list</h1>
   <div class="container-fluid">
-    <todo-card-list :toDoLists="this.toDos"></todo-card-list>
+    <todo-card-list :toDoLists="this.toDoLists"></todo-card-list>
   </div>
     <todo-create-form @created="addTodo"></todo-create-form>
 </template>
@@ -15,7 +15,7 @@ export default {
   components: { TodoCardList, TodoCreateForm },
   data () {
     return {
-      toDos: []
+      toDoLists: []
     }
   },
   methods: {
@@ -27,7 +27,7 @@ export default {
       }
       fetch(endpoint, requestOptions)
         .then(response => response.json())
-        .then(todo => this.toDos.push(todo))
+        .then(todo => this.toDoLists.push(todo))
         .catch(error => console.log('error', error))
     }
   },
