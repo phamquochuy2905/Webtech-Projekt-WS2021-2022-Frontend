@@ -1,7 +1,5 @@
 <template>
-  <div class="container-fluid">
-    <div class="col" v-for="toDoList in toDoLists" :key="toDoList.id">
-      <div class="card h-100">
+        <div class="card h-100">
         <img :src="getToDoList(toDoList)" class="card-img-bot" :alt="toDoList.title">
         <div class="card-body">
           <h5 class="card-title">{{ toDoList.title}} </h5>
@@ -11,16 +9,14 @@
           </p>
         </div>
       </div>
-    </div>
-  </div>
 </template>
 
 <script>
 export default {
-  name: 'TodoList',
+  name: 'TodoCard',
   props: {
-    toDoLists: {
-      type: Array,
+    toDoList: {
+      type: Object,
       required: true
     }
   },
