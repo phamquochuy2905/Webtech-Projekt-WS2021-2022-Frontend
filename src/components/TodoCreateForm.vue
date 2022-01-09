@@ -4,7 +4,7 @@
   </button>
   <div class="offcanvas offcanvas-end" tabindex="-1" id="todo-create-offcanvas" aria-labelledby="offcanvas-label">
     <div class="offcanvas-header">
-      <h5 id="offcanvas-label">New Person</h5>
+      <h5 id="offcanvas-label">New Task</h5>
       <button type="button" id="close-offcanvas" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class="mt-5">
-          <button class="btn btn-primary me-3" type="submit" @click="createTodo">Create</button>
+          <button class="btn btn-primary me-3" type="submit" @click.prevent="createTodo">Create</button>
           <button class="btn btn-danger" type="reset">Reset</button>
         </div>
       </form>
@@ -76,6 +76,7 @@ export default {
 
       fetch(endpoint, requestOptions)
         .catch(error => console.log('error', error))
+      window.location.reload()
     }
   }
 }

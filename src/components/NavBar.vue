@@ -9,16 +9,6 @@
         <router-link class="nav-link" to ="/"> Home </router-link>
         <router-link class="nav-link" to ="/about"> About </router-link>
         <router-link class="nav-link" to ="/todolist"> Todo List </router-link>
-
-        <ul class="nav justify-content-end">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Log in</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Registration</a>
-          </li>
-        </ul>
-
       </div>
     </div>
   </nav>
