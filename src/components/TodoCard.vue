@@ -1,5 +1,5 @@
 <template>
-        <img :src="getToDoList()" class="card-img-top" :alt="toDoList.title">
+        <img :src="getToDo()" class="card-img-top" :alt="toDoList.title">
         <div class="card-body">
           <h5 class="card-title">{{ toDoList.title}} </h5>
           <p class="card-text">
@@ -24,7 +24,7 @@ export default {
     }
   },
   methods: {
-    getToDoList () {
+    getToDo () {
       return require('../assets/todoPng.png')
     },
     deleteTodo () {
