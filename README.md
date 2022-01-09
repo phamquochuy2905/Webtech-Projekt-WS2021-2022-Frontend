@@ -1,4 +1,13 @@
 # todo-frontend
+#Themenbeschreibung
+
+
+Mit Hilfe dieser App wird eine inviduelle Aufgabenliste (To-Do-List) erstellt.
+
+Hierein kann man neue Aufgaben hinzufügen, löschen (nicht mehr nötig) sowie hinter einen grünen
+Haken machen (erledigt). Termine für Aufgaben sollten auch gesetzt werden.
+
+App ist unter https://spring-boot-to-do-app-frontend.herokuapp.com/ abrufbar.
 
 ## Project setup
 ```
