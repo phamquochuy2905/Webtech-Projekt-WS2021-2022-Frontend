@@ -31,6 +31,13 @@
             </label>
           </div>
         </div>
+        <div v-if="this.serverValidationMessages">
+          <ul>
+            <li v-for="(message, index) in serverValidationMessages" :key="index" style="color: red">
+              {{ message }}
+            </li>
+          </ul>
+        </div>
         <div class="mt-5">
           <button class="btn btn-primary me-3" type="submit" @click.prevent="createTodo">Create</button>
           <button class="btn btn-danger" type="reset">Reset</button>
@@ -47,36 +54,53 @@ export default {
     return {
       title: '',
       deadline: '',
-      completed: false
+      completed: false,
+      serverValidationMessages: []
     }
   },
+  emits: ['created'],
   methods: {
-    createTodo () {
-      console.log(this.title)
-      console.log(this.deadline)
-      console.log(this.completed)
+    async createTodo () {
+      if (this.validate()) {
+        const endpoint = process.env.VUE_APP_BACKEND_BASE_URL + '/api/v1/todos'
+        const headers = new Headers()
+        headers.append('Content-Type', 'application/json')
 
-      const endpoint = process.env.VUE_APP_BACKEND_BASE_URL + '/api/v1/todos'
+        const todo = JSON.stringify({
+          title: this.title,
+          deadline: this.deadline,
+          completed: this.completed
+        })
 
-      const headers = new Headers()
-      headers.append('Content-Type', 'application/json')
+        const requestOptions = {
+          method: 'POST',
+          headers: headers,
+          body: todo,
+          redirect: 'follow'
+        }
 
-      const payload = JSON.stringify({
-        title: this.title,
-        deadline: this.deadline,
-        completed: this.completed
-      })
-
-      const requestOptions = {
-        method: 'POST',
-        headers: headers,
-        body: payload,
-        redirect: 'follow'
+        const response = await fetch(endpoint, requestOptions)
+        await this.handleResponse(response)
+        window.location.reload()
       }
-
-      fetch(endpoint, requestOptions)
-        .catch(error => console.log('error', error))
-      window.location.reload()
+    },
+    async handleResponse (response) {
+      if (response.ok) {
+        this.$emit('created', response.headers.get('location'))
+        document.getElementById('close-offcanvas').click()
+      } else if (response.status === 400) {
+        response = await response.json()
+        response.errors.forEach(error => {
+          this.serverValidationMessages.push(error.defaultMessage)
+        })
+      } else {
+        this.serverValidationMessages.push('Unknown error occurred')
+      }
+    },
+    validate () {
+      const form = document.getElementById('todo-create-form')
+      form.classList.add('was-validated')
+      return form.checkValidity()
     }
   }
 }
